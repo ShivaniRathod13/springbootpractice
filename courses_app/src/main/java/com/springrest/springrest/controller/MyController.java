@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springrest.springrest.entities.Course;
 import com.springrest.springrest.services.CourseService;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
 @RequestMapping("/api/v1/")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MyController {
 	
 	@Autowired
@@ -39,21 +40,47 @@ public class MyController {
 	}
 	
 	//get course by courseId
+//	@GetMapping("courses/{courseId}")
+//	public Optional<Course> getCourse(@PathVariable String courseId) {
+//		return this.courseService.getCourse(Long.parseLong(courseId));
+//	}
+
 	@GetMapping("courses/{courseId}")
-	public Optional<Course> getCourse(@PathVariable String courseId) {
-		return this.courseService.getCourse(Long.parseLong(courseId));
+	public Course getCourse(@PathVariable Long courseId ){
+		return this.courseService.getCourse(courseId);
+
 	}
-	
+
+
+
 //	Delete course by courseId
+//	@DeleteMapping("/courses/{courseId}")
+//	public ResponseEntity<HttpStatus> deleteCourse(@PathVariable String courseId) {
+//		try {
+//			this.courseService.deleteCourse(Long.parseLong(courseId));
+//			return new ResponseEntity<>(HttpStatus.OK);
+//			}catch (Exception e) {
+//				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//			}
+//	}
+
+
+	//DELETE
 	@DeleteMapping("/courses/{courseId}")
-	public ResponseEntity<HttpStatus> deleteCourse(@PathVariable String courseId) {
+	public ResponseEntity<String>deleteCourse(@PathVariable String courseId){
 		try {
 			this.courseService.deleteCourse(Long.parseLong(courseId));
-			return new ResponseEntity<>(HttpStatus.OK);
-			}catch (Exception e) {
-				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-			}
+			return new ResponseEntity<>("DeleteSucessful",HttpStatus.OK);
+
+
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
+
+
+
 //	@DeleteMapping("/course/{courseId}")
 //	private void deleteCourse(@PathVariable String courseId)   
 //	{  
@@ -72,3 +99,4 @@ public class MyController {
 	}
 
 }
+
