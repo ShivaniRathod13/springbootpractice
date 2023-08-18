@@ -1,13 +1,9 @@
 package com.springrest.springrest.services;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 import com.springrest.springrest.dao.CourseDao;
 import com.springrest.springrest.entities.Course;
@@ -36,7 +32,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public Optional<Course> getCourse(long courseId) {
+	public Course getCourse(long courseId) {
 		
 //		Course c=null;
 //		
@@ -46,7 +42,7 @@ public class CourseServiceImpl implements CourseService {
 //				break;
 //			}
 //		}
-		return courseDao.findById(courseId);
+		return courseDao.findById(courseId).get();
 	}
 
 	@Override
@@ -76,3 +72,4 @@ public class CourseServiceImpl implements CourseService {
 	}
 	
 }
+
